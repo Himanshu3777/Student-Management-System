@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from django.urls import reverse
 
 from accounts.models import Registration
 from courses.models import Course
@@ -18,9 +17,12 @@ def student_list(request):
 #   STUDENT LIST DATA — JSON (AJAX)
 # ═══════════════════════════════════════════════════════════
 def student_list_data(request):
-    students = Registration.objects.select_related('course').all().order_by('-id')
+    students = Registration.objects.select_related(
+        'course'
+    ).all().order_by('-id')
 
     data = []
+
     for s in students:
         data.append({
             "id": s.id,
@@ -56,7 +58,9 @@ def student_details(request, id):
 #   STUDENT DATA — JSON (AJAX)
 # ═══════════════════════════════════════════════════════════
 def student_data(request, id):
-    student = Registration.objects.select_related('course').filter(id=id).first()
+    student = Registration.objects.select_related(
+        'course'
+    ).filter(id=id).first()
 
     if not student:
         return JsonResponse({
@@ -71,11 +75,17 @@ def student_data(request, id):
             "fname": student.fname,
             "lname": student.lname,
             "full_name": f"{student.fname} {student.lname}",
-            "initials": f"{student.fname[0]}{student.lname[0]}".upper(),
+            "initials": (
+                f"{student.fname[0]}{student.lname[0]}"
+            ).upper(),
             "email": student.email,
             "phone": student.phone,
             "roll": student.roll,
-            "course": student.course.courses_name if student.course else "—",
+            "course": (
+                student.course.courses_name
+                if student.course
+                else "—"
+            ),
             "gender": student.gender or "—",
             "DOB": str(student.DOB) if student.DOB else "—",
             "address": student.address or "—",
