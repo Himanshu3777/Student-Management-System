@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile | SMS</title>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
@@ -47,60 +46,59 @@
         <main class="main">
 
             <!-- TOPBAR -->
-<div class="topbar">
-    <!-- 👇 3 Lines (Mobile Menu Toggle) -->
-    <button class="menu-toggle" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-    </button>
+            <div class="topbar">
+                <button class="menu-toggle" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
 
-    <h1>Profile</h1>
+                <h1>Profile</h1>
 
-    <!-- 👇 Profile Dropdown -->
-    <div class="profile-wrapper">
-        <button class="profile-button" tabindex="0">
-            <div class="profile-avatar"><i class="fas fa-user-graduate"></i></div>
-            <div class="profile-text">
-                <span><i class="fas fa-circle"></i> Student</span>
+                <div class="profile-wrapper">
+                    <button class="profile-button" tabindex="0">
+                        <div class="profile-avatar"><i class="fas fa-user-graduate"></i></div>
+                        <div class="profile-text">
+                            <span><i class="fas fa-circle"></i> Student</span>
+                        </div>
+                        <i class="fas fa-chevron-down profile-arrow"></i>
+                    </button>
+
+                    <div class="profile-dropdown">
+                        <div class="dropdown-user">
+                            <div class="dropdown-avatar"><i class="fas fa-user-graduate"></i></div>
+                        </div>
+                        <a href="{% url 'profile' %}" class="dropdown-item">
+                            <div class="dropdown-icon"><i class="fas fa-user"></i></div>
+                            <div class="dropdown-content">
+                                <strong>My Profile</strong><span>View your profile</span>
+                            </div>
+                            <i class="fas fa-chevron-right dropdown-arrow"></i>
+                        </a>
+                        <a href="{% url 'register' %}" class="dropdown-item">
+                            <div class="dropdown-icon"><i class="fas fa-user-plus"></i></div>
+                            <div class="dropdown-content">
+                                <strong>Registration</strong><span>Create new account</span>
+                            </div>
+                            <i class="fas fa-chevron-right dropdown-arrow"></i>
+                        </a>
+                        <a href="{% url 'login' %}" class="dropdown-item">
+                            <div class="dropdown-icon"><i class="fas fa-right-to-bracket"></i></div>
+                            <div class="dropdown-content">
+                                <strong>Login</strong><span>Sign in to account</span>
+                            </div>
+                            <i class="fas fa-chevron-right dropdown-arrow"></i>
+                        </a>
+                        <div class="dropdown-line"></div>
+                        <a href="{% url 'logout' %}" class="dropdown-item logout-item">
+                            <div class="dropdown-icon"><i class="fas fa-power-off"></i></div>
+                            <div class="dropdown-content">
+                                <strong>Logout</strong><span>Sign out safely</span>
+                            </div>
+                            <i class="fas fa-chevron-right dropdown-arrow"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <i class="fas fa-chevron-down profile-arrow"></i>
-        </button>
 
-        <div class="profile-dropdown">
-            <div class="dropdown-user">
-                <div class="dropdown-avatar"><i class="fas fa-user-graduate"></i></div>
-            </div>
-            <a href="{% url 'profile' %}" class="dropdown-item">
-                <div class="dropdown-icon"><i class="fas fa-user"></i></div>
-                <div class="dropdown-content">
-                    <strong>My Profile</strong><span>View your profile</span>
-                </div>
-                <i class="fas fa-chevron-right dropdown-arrow"></i>
-            </a>
-            <a href="{% url 'register' %}" class="dropdown-item">
-                <div class="dropdown-icon"><i class="fas fa-user-plus"></i></div>
-                <div class="dropdown-content">
-                    <strong>Registration</strong><span>Create new account</span>
-                </div>
-                <i class="fas fa-chevron-right dropdown-arrow"></i>
-            </a>
-            <a href="{% url 'login' %}" class="dropdown-item">
-                <div class="dropdown-icon"><i class="fas fa-right-to-bracket"></i></div>
-                <div class="dropdown-content">
-                    <strong>Login</strong><span>Sign in to account</span>
-                </div>
-                <i class="fas fa-chevron-right dropdown-arrow"></i>
-            </a>
-            <div class="dropdown-line"></div>
-            <a href="{% url 'logout' %}" class="dropdown-item logout-item">
-                <div class="dropdown-icon"><i class="fas fa-power-off"></i></div>
-                <div class="dropdown-content">
-                    <strong>Logout</strong><span>Sign out safely</span>
-                </div>
-                <i class="fas fa-chevron-right dropdown-arrow"></i>
-            </a>
-        </div>
-    </div>
-</div>
             <!-- PROFILE CARD -->
             <div class="profile-card">
 
@@ -174,7 +172,7 @@
                     </div>
 
                     <div class="actions">
-                        <a href="{% url 'student_edit' %}" class="btn btn-primary">
+                        <a href="{% url 'student_edit' registrations.id %}" class="btn btn-primary">
                             <i class="fas fa-edit"></i> Edit Profile
                         </a>
                         <a href="{% url 'logout' %}" class="btn btn-danger">
