@@ -1,0 +1,3 @@
+// jab ham Django me project create karte hai to predefine file create hota hai like this ->
+
+1>manage.py=> is file ka kam djando

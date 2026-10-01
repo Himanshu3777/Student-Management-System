@@ -1,0 +1,597 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard | SMS</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+
+  <!-- ⭐ Hidden checkbox — sidebar toggle ke liye -->
+  <input type="checkbox" id="sidebarToggle" class="sidebar-toggle-input" hidden>
+
+  <div class="layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+      <div class="sidebar-brand">
+        <i class="fas fa-graduation-cap"></i>
+        <h2>SMS Portal</h2>
+      </div>
+
+      <nav>
+
+        <!-- MAIN -->
+
+        <div class="nav-section">
+
+          <div class="nav-label">
+            Main
+          </div>
+
+          <a href="{% url 'home' %}" class="nav-link active">
+            <i class="fas fa-home"></i>
+            Dashboard
+          </a>
+
+          <a href="{% url 'profile' %}" class="nav-link">
+            <i class="fas fa-user"></i>
+            Profile
+          </a>
+
+        </div>
+
+
+        <!-- MANAGEMENT -->
+
+        <div class="nav-section">
+
+          <div class="nav-label">
+            Management
+          </div>
+
+          <a href="{% url 'student_list' %}" class="nav-link">
+            <i class="fas fa-user-graduate"></i>
+            Students
+          </a>
+
+          <a href="{% url 'teacher_list' %}" class="nav-link">
+            <i class="fas fa-chalkboard-teacher"></i>
+            Teachers
+          </a>
+
+          <a href="{% url 'course_list' %}" class="nav-link">
+            <i class="fas fa-book"></i>
+            Courses
+          </a>
+
+        </div>
+
+
+        <!-- RECORDS -->
+
+        <div class="nav-section">
+
+          <div class="nav-label">
+            Records
+          </div>
+
+          <a href="{% url 'attendance_list' %}" class="nav-link">
+            <i class="fas fa-calendar-check"></i>
+            Attendance
+          </a>
+
+          <a href="{% url 'result_list' %}" class="nav-link">
+            <i class="fas fa-file-alt"></i>
+            Results
+          </a>
+
+        </div>
+
+
+        <!-- ACCOUNT -->
+
+        <div class="nav-section">
+
+          <div class="nav-label">
+            Account
+          </div>
+
+          <a href="{% url 'logout' %}" class="nav-link">
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+          </a>
+
+        </div>
+
+      </nav>
+
+    </aside>
+
+
+    <!-- ⭐ OVERLAY — sidebar open hone par dark background -->
+    <label for="sidebarToggle" class="sidebar-overlay"></label>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+      <!-- TOPBAR -->
+
+      <div class="topbar">
+
+        <div class="topbar-left">
+
+          <!-- ⭐ HAMBURGER — mobile only -->
+          <label for="sidebarToggle" class="menu-toggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+          </label>
+
+          <div class="dashboard-title">
+            <h1>Dashboard</h1>
+            <p>Welcome back! Here's your overview</p>
+          </div>
+
+        </div>
+
+        <div class="topbar-right">
+
+          <div class="profile-wrapper">
+
+            <button class="profile-button" tabindex="0">
+              <div class="profile-avatar">
+                <i class="fas fa-user-graduate"></i>
+              </div>
+              <div class="profile-text">
+                <span>
+                  <i class="fas fa-circle"></i>
+                  Student
+                </span>
+              </div>
+              <i class="fas fa-chevron-down profile-arrow"></i>
+            </button>
+
+            <div class="profile-dropdown">
+
+              <div class="dropdown-user">
+                <div class="dropdown-avatar">
+                  <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="dropdown-user-info">
+                  <strong>Student Account</strong>
+                  <span>student@sms.com</span>
+                </div>
+              </div>
+
+              <div class="dropdown-line"></div>
+
+              <a href="{% url 'profile' %}" class="dropdown-item">
+                <div class="dropdown-icon">
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="dropdown-content">
+                  <strong>My Profile</strong>
+                  <span>View your profile</span>
+                </div>
+                <i class="fas fa-chevron-right dropdown-arrow"></i>
+              </a>
+
+              <a href="{% url 'register' %}" class="dropdown-item">
+                <div class="dropdown-icon">
+                  <i class="fas fa-user-plus"></i>
+                </div>
+                <div class="dropdown-content">
+                  <strong>Registration</strong>
+                  <span>Create new account</span>
+                </div>
+                <i class="fas fa-chevron-right dropdown-arrow"></i>
+              </a>
+
+              <a href="{% url 'login' %}" class="dropdown-item">
+                <div class="dropdown-icon">
+                  <i class="fas fa-right-to-bracket"></i>
+                </div>
+                <div class="dropdown-content">
+                  <strong>Login</strong>
+                  <span>Sign in to account</span>
+                </div>
+                <i class="fas fa-chevron-right dropdown-arrow"></i>
+              </a>
+
+              <div class="dropdown-line"></div>
+
+              <a href="{% url 'logout' %}" class="dropdown-item logout-item">
+                <div class="dropdown-icon">
+                  <i class="fas fa-power-off"></i>
+                </div>
+                <div class="dropdown-content">
+                  <strong>Logout</strong>
+                  <span>Sign out safely</span>
+                </div>
+                <i class="fas fa-chevron-right dropdown-arrow"></i>
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================= WELCOME ================= -->
+
+      <div class="welcome">
+
+        <div class="welcome-content">
+          <h2>
+            Welcome to Student Management System <span class="wave">👋</span>
+          </h2>
+          <p>
+            Here's what's happening in your school today.
+          </p>
+          <div class="welcome-actions">
+            <a href="{% url 'student_list' %}" class="welcome-btn primary">
+              <i class="fas fa-users"></i> View Students
+            </a>
+            <a href="{% url 'mark_attendance' %}" class="welcome-btn secondary">
+              <i class="fas fa-calendar-check"></i> Mark Attendance
+            </a>
+          </div>
+        </div>
+
+        <i class="fas fa-graduation-cap deco"></i>
+
+      </div>
+
+
+      <!-- ================= STAT CARDS ================= -->
+
+      <div class="stats-grid">
+
+        <a href="{% url 'student_list' %}" class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-icon icon-blue">
+              <i class="fas fa-user-graduate"></i>
+            </div>
+            <div class="stat-trend up">
+              <i class="fas fa-arrow-up"></i> 12%
+            </div>
+          </div>
+          <div class="stat-info">
+            <h3>{{ registrations.count }}</h3>
+            <p>Total Students</p>
+          </div>
+          <div class="stat-progress">
+            <div class="stat-progress-bar" style="width: 75%; background: linear-gradient(90deg, #667eea, #764ba2);"></div>
+          </div>
+        </a>
+
+        <a href="{% url 'teacher_list' %}" class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-icon icon-green">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <div class="stat-trend up">
+              <i class="fas fa-arrow-up"></i> 8%
+            </div>
+          </div>
+          <div class="stat-info">
+            <h3>{{ teacher.count }}</h3>
+            <p>Total Teachers</p>
+          </div>
+          <div class="stat-progress">
+            <div class="stat-progress-bar" style="width: 60%; background: linear-gradient(90deg, #43e97b, #38f9d7);"></div>
+          </div>
+        </a>
+
+        <a href="{% url 'course_list' %}" class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-icon icon-orange">
+              <i class="fas fa-book"></i>
+            </div>
+            <div class="stat-trend up">
+              <i class="fas fa-arrow-up"></i> 5%
+            </div>
+          </div>
+          <div class="stat-info">
+            <h3>{{ course.count }}</h3>
+            <p>Total Courses</p>
+          </div>
+          <div class="stat-progress">
+            <div class="stat-progress-bar" style="width: 45%; background: linear-gradient(90deg, #f6d365, #fda085);"></div>
+          </div>
+        </a>
+
+        <a href="{% url 'result_list' %}" class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-icon icon-pink">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="stat-trend up">
+              <i class="fas fa-arrow-up"></i> 15%
+            </div>
+          </div>
+          <div class="stat-info">
+            <h3>{{ result.count }}</h3>
+            <p>Results Published</p>
+          </div>
+          <div class="stat-progress">
+            <div class="stat-progress-bar" style="width: 85%; background: linear-gradient(90deg, #f093fb, #f5576c);"></div>
+          </div>
+        </a>
+
+      </div>
+
+
+      <!-- ================= QUICK ACTIONS ================= -->
+
+      <h3 class="section-title">
+        <i class="fas fa-bolt" style="color:#667eea;"></i>
+        Quick Actions
+      </h3>
+
+
+      <div class="actions-grid">
+
+        <a href="{% url 'student_list' %}" class="action-tile">
+          <div class="action-icon-wrap blue">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <span>Student Records</span>
+        </a>
+
+        <a href="{% url 'teacher_add' %}" class="action-tile">
+          <div class="action-icon-wrap green">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <span>Add Teacher</span>
+        </a>
+
+        <a href="{% url 'course_add' %}" class="action-tile">
+          <div class="action-icon-wrap orange">
+            <i class="fas fa-book-medical"></i>
+          </div>
+          <span>Add Course</span>
+        </a>
+
+        <a href="{% url 'mark_attendance' %}" class="action-tile">
+          <div class="action-icon-wrap purple">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <span>Attendance</span>
+        </a>
+
+        <a href="{% url 'result_add' %}" class="action-tile">
+          <div class="action-icon-wrap pink">
+            <i class="fas fa-poll"></i>
+          </div>
+          <span>Add Result</span>
+        </a>
+
+        <a href="{% url 'profile' %}" class="action-tile">
+          <div class="action-icon-wrap teal">
+            <i class="fas fa-user-cog"></i>
+          </div>
+          <span>My Profile</span>
+        </a>
+
+      </div>
+
+
+      <!-- ================= PREMIUM FOOTER ================= -->
+
+      <footer class="premium-footer">
+
+        <div class="footer-topline"></div>
+
+        <div class="footer-container">
+
+          <div class="footer-brand-section">
+
+            <div class="footer-brand-logo">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+
+            <h3>Student Management System</h3>
+
+            <p>
+              A complete platform to manage students, teachers,
+              courses, attendance & results — all from one
+              powerful dashboard.
+            </p>
+
+            <div class="footer-social-links">
+
+              <a href="https://www.facebook.com/profile.php?id=100073292786916" target="_blank" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+
+              <a href="https://www.instagram.com/_coding_lover_boy_/?hl=en" target="_blank" title="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+
+              <a href="https://www.linkedin.com/in/himanshu-yadav-478547289/" target="_blank" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+
+              <a href="https://github.com/Himanshu3777" target="_blank" title="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+
+              <a href="https://www.youtube.com/@himanshusarkar1536" target="_blank" title="YouTube">
+                <i class="fab fa-youtube"></i>
+              </a>
+
+            </div>
+
+          </div>
+
+
+          <div class="footer-links-grid">
+
+            <div class="footer-column">
+
+              <h4>
+                <span></span>
+                Quick Links
+              </h4>
+
+              <ul>
+                <li>
+                  <a href="{% url 'home' %}">
+                    <i class="fas fa-angle-right"></i>
+                    Dashboard
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'student_list' %}">
+                    <i class="fas fa-angle-right"></i>
+                    Students
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'teacher_list' %}">
+                    <i class="fas fa-angle-right"></i>
+                    Teachers
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'course_list' %}">
+                    <i class="fas fa-angle-right"></i>
+                    Courses
+                  </a>
+                </li>
+              </ul>
+
+            </div>
+
+
+            <div class="footer-column">
+
+              <h4>
+                <span></span>
+                Records
+              </h4>
+
+              <ul>
+                <li>
+                  <a href="{% url 'attendance_list' %}">
+                    <i class="fas fa-angle-right"></i>
+                    Attendance
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'result_list' %}">
+                    <i class="fas fa-angle-right"></i>
+                    Results
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'profile' %}">
+                    <i class="fas fa-angle-right"></i>
+                    My Profile
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'logout' %}">
+                    <i class="fas fa-angle-right"></i>
+                    Logout
+                  </a>
+                </li>
+              </ul>
+
+            </div>
+
+
+            <div class="footer-column">
+
+              <h4>
+                <span></span>
+                Get in Touch
+              </h4>
+
+              <ul class="contact-list">
+
+                <li>
+                  <i class="fas fa-envelope"></i>
+                  <span>himanshuyadav88813@gmail.com</span>
+                </li>
+
+                <li>
+                  <i class="fas fa-phone-alt"></i>
+                  <span>+91 8881363440</span>
+                </li>
+
+                <li>
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>New Delhi, India</span>
+                </li>
+
+                <li>
+                  <i class="fas fa-clock"></i>
+                  <span>Mon - Fri, 9:00 - 5:00 PM</span>
+                </li>
+
+              </ul>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="footer-bottom-bar">
+
+          <div class="footer-bottom-content">
+
+            <p>
+              © 2025
+              <strong>Student Management System</strong>.
+              All rights reserved.
+              <span class="heart">
+                Made with <i class="fas fa-heart"></i> in India
+              </span>
+            </p>
+
+            <div class="footer-legal-links">
+              <a href="#">Privacy</a>
+              <span>•</span>
+              <a href="#">Terms</a>
+              <span>•</span>
+              <a href="#">Sitemap</a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </footer>
+
+    </main>
+
+  </div>
+
+
+  <script src="{% static 'js/base.js' %}"></script>
+  <script src="{% static 'js/dashboard.js' %}"></script>
+
+</body>
+
+</html>

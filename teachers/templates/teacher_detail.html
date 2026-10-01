@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Detail | SMS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'CSS/teachers.css' %}">
+</head>
+<body>
+  <div class="layout">
+
+    <!-- SIDEBAR (same as list) -->
+    <aside class="sidebar" id="sidebar">
+      <!-- ... same sidebar ... -->
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <h1>Teacher Details</h1>
+        <div class="profile-wrapper"><!-- ... --></div>
+      </div>
+
+      <a href="{% url 'teacher_list' %}" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Teachers
+      </a>
+
+      <!-- Hidden ID -->
+      <input type="hidden" id="teacherId" value="{{ teacher_id }}">
+
+      <div class="detail-card">
+        <div class="detail-header">
+          <div class="detail-avatar" id="detailInitials">--</div>
+          <div class="detail-title">
+            <h2 id="detailName">Loading...</h2>
+            <p><i class="fas fa-envelope"></i> <span id="detailEmail">...</span></p>
+            <span class="badge badge-info" id="detailSubject">...</span>
+          </div>
+        </div>
+
+        <div class="detail-body">
+          <div class="info-grid">
+
+            <div class="info-item">
+              <label><i class="fas fa-id-badge"></i> Employee ID</label>
+              <div class="value" id="detailEmpId">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-phone"></i> Phone</label>
+              <div class="value" id="detailPhone">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-graduation-cap"></i> Qualification</label>
+              <div class="value" id="detailQualification">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-briefcase"></i> Experience</label>
+              <div class="value" id="detailExperience">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-map-marker-alt"></i> Address</label>
+              <div class="value" id="detailAddress">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-calendar-plus"></i> Joined On</label>
+              <div class="value" id="detailJoiningDate">—</div>
+            </div>
+
+          </div>
+
+          <div class="actions">
+            <a href="#" id="editBtn" class="btn btn-primary">
+              <i class="fas fa-edit"></i> Edit
+            </a>
+            <button onclick="deleteTeacher()" class="btn btn-danger">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+            <a href="{% url 'teacher_list' %}" class="btn btn-secondary">
+              <i class="fas fa-arrow-left"></i> Back
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="{% static 'JS/sidebar.js' %}"></script>
+  <script src="{% static 'JS/teachers.js' %}"></script>
+</body>
+</html>

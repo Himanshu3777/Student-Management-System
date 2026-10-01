@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result Detail | SMS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/results.css' %}">
+</head>
+<body>
+  <div class="layout">
+
+    <!-- SIDEBAR (same as before) -->
+    <aside class="sidebar" id="sidebar">
+      <!-- ... same sidebar ... -->
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- TOPBAR (same as before) -->
+      <div class="topbar">
+        <!-- ... same topbar ... -->
+      </div>
+
+      <a href="{% url 'result_list' %}" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Results
+      </a>
+
+      <!-- Hidden input — result ID -->
+      <input type="hidden" id="resultId" value="{{ result_id }}">
+
+      <div class="detail-card">
+        <div class="detail-header">
+          <div class="detail-avatar" id="detailInitials">--</div>
+          <div class="detail-title">
+            <h2 id="detailName">Loading...</h2>
+            <p><i class="fas fa-id-card"></i> <span id="detailRoll">...</span></p>
+            <span class="badge badge-info" id="detailExam">...</span>
+          </div>
+        </div>
+
+        <div class="detail-body">
+          <div class="info-grid">
+
+            <div class="info-item">
+              <label><i class="fas fa-book"></i> Course</label>
+              <div class="value" id="detailCourse">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-layer-group"></i> Semester</label>
+              <div class="value" id="detailSemester">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-poll"></i> Marks</label>
+              <div class="value" id="detailMarks">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-percentage"></i> Percentage</label>
+              <div class="value" id="detailPercentage">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-check-circle"></i> Result</label>
+              <div class="value" id="detailStatus">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-calendar"></i> Date</label>
+              <div class="value" id="detailDate">—</div>
+            </div>
+
+          </div>
+
+          <div class="actions">
+            <a href="#" id="editBtn" class="btn btn-primary">
+              <i class="fas fa-edit"></i> Edit
+            </a>
+            <button onclick="deleteResult()" class="btn btn-danger">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+            <a href="{% url 'result_list' %}" class="btn btn-secondary">
+              <i class="fas fa-arrow-left"></i> Back
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="{% static 'js/results.js' %}"></script>
+</body>
+</html>

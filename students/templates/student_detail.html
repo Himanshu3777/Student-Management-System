@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Detail | SMS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/students.css' %}">
+</head>
+<body>
+  <div class="layout">
+
+    <!-- SIDEBAR (same) -->
+    <aside class="sidebar" id="sidebar">
+      <!-- ... same sidebar ... -->
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <h1>Student Details</h1>
+        <div class="profile-wrapper"><!-- ... --></div>
+      </div>
+
+      <a href="{% url 'student_list' %}" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Students
+      </a>
+
+      <!-- Hidden ID -->
+      <input type="hidden" id="studentId" value="{{ student_id }}">
+
+      <div class="detail-card">
+        <div class="detail-header">
+          <div class="detail-avatar" id="detailInitials">--</div>
+          <div class="detail-title">
+            <h2 id="detailName">Loading...</h2>
+            <p><i class="fas fa-id-card"></i> <span id="detailRoll">...</span></p>
+            <span class="badge badge-info" id="detailStatus">Active</span>
+          </div>
+        </div>
+
+        <div class="detail-body">
+          <div class="info-grid">
+
+            <div class="info-item">
+              <label><i class="fas fa-envelope"></i> Email</label>
+              <div class="value" id="detailEmail">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-phone"></i> Phone</label>
+              <div class="value" id="detailPhone">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-book"></i> Course</label>
+              <div class="value" id="detailCourse">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-venus-mars"></i> Gender</label>
+              <div class="value" id="detailGender">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-calendar"></i> Date of Birth</label>
+              <div class="value" id="detailDOB">—</div>
+            </div>
+
+            <div class="info-item">
+              <label><i class="fas fa-map-marker-alt"></i> Address</label>
+              <div class="value" id="detailAddress">—</div>
+            </div>
+
+          </div>
+
+          <div class="actions">
+            <a href="#" id="editBtn" class="btn btn-primary">
+              <i class="fas fa-edit"></i> Edit
+            </a>
+            <a href="{% url 'student_list' %}" class="btn btn-secondary">
+              <i class="fas fa-arrow-left"></i> Back
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="{% static 'js/sidebar.js' %}"></script>
+  <script src="{% static 'js/students.js' %}"></script>
+</body>
+</html>

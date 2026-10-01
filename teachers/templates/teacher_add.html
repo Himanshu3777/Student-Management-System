@@ -1,0 +1,273 @@
+```html
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Add Teacher | SMS</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">e project ki files ki list dikhegi, jaise:
+  <link rel="stylesheet" href="{% static 'CSS/teachers.css' %}">    <!-- ⭐ YE ADD KARO -->
+</head>
+
+<body>
+
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+
+      <div class="sidebar-brand">
+        <i class="fas fa-graduation-cap"></i>
+        <h2>SMS Portal</h2>
+      </div>
+
+      <nav>
+
+        <!-- Main -->
+        <div class="nav-section">
+          <div class="nav-label">Main</div>
+
+          <a href="{% url 'home' %}" class="nav-link">
+            <i class="fas fa-home"></i> Dashboard
+          </a>
+
+          <a href="{% url 'profile' %}" class="nav-link">
+            <i class="fas fa-user"></i> Profile
+          </a>
+        </div>
+
+
+        <!-- Management -->
+        <div class="nav-section">
+          <div class="nav-label">Management</div>
+
+          <a href="{% url 'student_list' %}" class="nav-link">
+            <i class="fas fa-user-graduate"></i> Students
+          </a>
+
+          <a href="{% url 'teacher_list' %}" class="nav-link active">
+            <i class="fas fa-chalkboard-teacher"></i> Teachers
+          </a>
+
+          <a href="{% url 'course_list' %}" class="nav-link">
+            <i class="fas fa-book"></i> Courses
+          </a>
+        </div>
+
+
+        <!-- Records -->
+        <div class="nav-section">
+          <div class="nav-label">Records</div>
+
+          <a href="{% url 'attendance_list' %}" class="nav-link">
+            <i class="fas fa-calendar-check"></i> Attendance
+          </a>
+
+          <a href="{% url 'result_list' %}" class="nav-link">
+            <i class="fas fa-file-alt"></i> Results
+          </a>
+        </div>
+
+
+        <!-- Account -->
+        <div class="nav-section">
+          <div class="nav-label">Account</div>
+
+          <a href="{% url 'logout' %}" class="nav-link">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+        </div>
+
+      </nav>
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main">
+
+      <!-- Topbar -->
+      <div class="topbar">
+
+        <button class="menu-toggle" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <h1>Add New Teacher</h1>
+
+        <div class="user-info">
+          <span>John Doe</span>
+
+          <div class="user-avatar">
+            J
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- Back Button -->
+      <a href="{% url 'teacher_list' %}" class="back-link">
+        <i class="fas fa-arrow-left"></i>
+        Back to Teachers
+      </a>
+
+
+      <!-- Form Card -->
+      <div class="form-card">
+
+        <div class="form-card-header">
+          <i class="fas fa-user-plus"></i>
+          <h2>Teacher Information</h2>
+        </div>
+
+
+        <!-- Teacher Form -->
+        <form method="post" id="teacherForm" action="{% url 'teacher_add' %}">
+
+          {% csrf_token %}
+
+
+          <!-- Full Name + Employee ID -->
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label>Full Name *</label>
+
+              <input type="text" name="name" class="form-control" placeholder="e.g. Dr. Rajesh Kumar" required>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>Employee ID *</label>
+
+              <input type="text" name="employee_id" class="form-control" placeholder="e.g. TCH2024001" required>
+
+            </div>
+
+          </div>
+
+
+          <!-- Email + Phone -->
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label>Email *</label>
+
+              <input type="email" name="email" class="form-control" placeholder="teacher@example.com" required>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>Phone</label>
+
+              <input type="tel" name="phone" class="form-control" placeholder="+91 98765 43210">
+
+            </div>
+
+          </div>
+
+
+          <!-- Subject + Qualification -->
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label>Subject *</label>
+
+              <input type="text" name="subject" class="form-control" placeholder="e.g. Mathematics" required>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>Qualification</label>
+
+              <input type="text" name="qualification" class="form-control" placeholder="e.g. Ph.D. Mathematics">
+
+            </div>
+
+          </div>
+
+
+          <!-- Experience + Joining Date -->
+          <div class="form-row">
+
+            <div class="form-group">
+
+              <label>Experience (Years)</label>
+
+              <input type="number" name="experience" class="form-control" placeholder="e.g. 10" min="0">
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>Joining Date</label>
+
+              <input type="date" name="joining_date" class="form-control">
+
+            </div>
+
+          </div>
+
+
+          <!-- Address -->
+          <div class="form-group">
+
+            <label>
+              Address <span>(optional)</span>
+            </label>
+
+            <textarea name="address" class="form-control" rows="3" placeholder="Full address"></textarea>
+
+          </div>
+
+
+          <!-- Buttons -->
+          <div class="actions">
+
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save"></i>
+              Save Teacher
+            </button>
+
+
+            <a href="{% url 'teacher_list' %}" class="btn btn-secondary">
+              <i class="fas fa-times"></i>
+              Cancel
+            </a>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- JavaScript -->
+  <script src="{% static 'JS/base.js' %}"></script>
+
+  <!-- <script src="{% static 'JS/teachers.js' %}"></script> -->
+
+</body>
+
+</html>

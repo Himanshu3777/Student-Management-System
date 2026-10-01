@@ -1,0 +1,219 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mark Attendance | SMS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/attendance.css' %}">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <i class="fas fa-graduation-cap"></i>
+        <h2>SMS Portal</h2>
+      </div>
+      <nav>
+        <div class="nav-section">
+          <div class="nav-label">Main</div>
+          <a href="{% url 'home' %}" class="nav-link"><i class="fas fa-home"></i> Dashboard</a>
+          <a href="{% url 'profile' %}" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-label">Management</div>
+          <a href="{% url 'student_list' %}" class="nav-link"><i class="fas fa-user-graduate"></i> Students</a>
+          <a href="{% url 'teacher_list' %}" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Teachers</a>
+          <a href="{% url 'course_list' %}" class="nav-link"><i class="fas fa-book"></i> Courses</a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-label">Records</div>
+          <a href="{% url 'attendance_list' %}" class="nav-link active"><i class="fas fa-calendar-check"></i> Attendance</a>
+          <a href="{% url 'result_list' %}" class="nav-link"><i class="fas fa-file-alt"></i> Results</a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-label">Account</div>
+          <a href="{% url 'logout' %}" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="main">
+<div class="topbar">
+  <button class="menu-toggle" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+  </button>
+  <h1>Attendance Records</h1>
+
+  <!-- 👇 PROFILE WRAPPER -->
+  <div class="profile-wrapper">
+
+    <!-- Profile Button -->
+    <button class="profile-button" tabindex="0">
+      <div class="profile-avatar">
+        <i class="fas fa-user-graduate"></i>
+      </div>
+      <div class="profile-text">
+        <span>
+          <i class="fas fa-circle"></i>
+          Student
+        </span>
+      </div>
+      <i class="fas fa-chevron-down profile-arrow"></i>
+    </button>
+
+    <!-- Dropdown -->
+    <div class="profile-dropdown">
+
+      <div class="dropdown-user">
+        <div class="dropdown-avatar">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+      </div>
+
+      <a href="{% url 'profile' %}" class="dropdown-item">
+        <div class="dropdown-icon"><i class="fas fa-user"></i></div>
+        <div class="dropdown-content">
+          <strong>My Profile</strong>
+          <span>View your profile</span>
+        </div>
+        <i class="fas fa-chevron-right dropdown-arrow"></i>
+      </a>
+
+      <a href="{% url 'register' %}" class="dropdown-item">
+        <div class="dropdown-icon"><i class="fas fa-user-plus"></i></div>
+        <div class="dropdown-content">
+          <strong>Registration</strong>
+          <span>Create new account</span>
+        </div>
+        <i class="fas fa-chevron-right dropdown-arrow"></i>
+      </a>
+
+      <a href="{% url 'login' %}" class="dropdown-item">
+        <div class="dropdown-icon"><i class="fas fa-right-to-bracket"></i></div>
+        <div class="dropdown-content">
+          <strong>Login</strong>
+          <span>Sign in to account</span>
+        </div>
+        <i class="fas fa-chevron-right dropdown-arrow"></i>
+      </a>
+
+      <div class="dropdown-line"></div>
+
+      <a href="{% url 'logout' %}" class="dropdown-item logout-item">
+        <div class="dropdown-icon"><i class="fas fa-power-off"></i></div>
+        <div class="dropdown-content">
+          <strong>Logout</strong>
+          <span>Sign out safely</span>
+        </div>
+        <i class="fas fa-chevron-right dropdown-arrow"></i>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+      <a href="{% url 'attendance_list' %}" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Attendance List
+      </a>
+
+      <div class="form-card">
+        <div class="form-card-header">
+          <i class="fas fa-calendar-check"></i>
+          <h2>Mark Today's Attendance</h2>
+        </div>
+
+        <form method="post" id="attendanceForm" action="{% url 'mark_attendance' %}">
+          <!-- ek hidden input hai -->
+          {% csrf_token %}
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Date *</label>
+              <input type="date" name="date" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>Course *</label>
+              <select name="course" class="form-control" required>
+                <option value="">Select Course</option>
+                {% for c in course %}
+                <option value="{{ c.id }}">{{ c.courses_name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Semester</label>
+            <select name="semester" class="form-control">
+              <option value="1">Semester 1</option>
+              <option value="2">Semester 2</option>
+              <option value="3">Semester 3</option>
+              <option value="4">Semester 4</option>
+              <option value="5">Semester 5</option>
+              <option value="6">Semester 6</option>
+              <option value="7">Semester 7</option>
+              <option value="8">Semester 8</option>
+            </select>
+          </div>
+
+          <h3 class="section-title">
+            <i class="fas fa-users" style="color:#667eea;"></i> Student List
+          </h3>
+
+          <div class="table-wrapper">
+            <table id="attendanceTable">
+              <thead>
+                <tr>
+                  <th>Roll No</th>
+                  <th>Name</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {% for student in student %}
+                <tr>
+                  <td>{{ student.roll }}</td>
+                  <td>{{ student.fname }} {{ student.lname }}</td>
+                  <td>
+                    <div class="attendance-options">
+                      <label class="radio-pill present">
+                        <input type="radio" name="status_{{ student.id }}" value="present" checked> Present
+                      </label>
+                      <label class="radio-pill absent">
+                        <input type="radio" name="status_{{ student.id }}" value="absent"> Absent
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="3" style="text-align:center; padding:1.5rem; color:#718096;">
+                    No students found.
+                  </td>
+                </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save"></i> Save Attendance
+            </button>
+            <a href="{% url 'attendance_list' %}" class="btn btn-secondary">
+              <i class="fas fa-times"></i> Cancel
+            </a>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="{% static 'js/sidebar.js' %}"></script>
+  <script src="{% static 'js/attendance.js' %}"></script>
+</body>
+</html>

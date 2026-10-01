@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Detail | SMS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/courses.css' %}">
+</head>
+<body>
+  <div class="layout">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <i class="fas fa-graduation-cap"></i>
+        <h2>SMS Portal</h2>
+      </div>
+      <nav>
+        <div class="nav-section">
+          <div class="nav-label">Main</div>
+          <a href="{% url 'home' %}" class="nav-link"><i class="fas fa-home"></i> Dashboard</a>
+          <a href="{% url 'profile' %}" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-label">Management</div>
+          <a href="{% url 'student_list' %}" class="nav-link"><i class="fas fa-user-graduate"></i> Students</a>
+          <a href="{% url 'teacher_list' %}" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Teachers</a>
+          <a href="{% url 'course_list' %}" class="nav-link active"><i class="fas fa-book"></i> Courses</a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-label">Records</div>
+          <a href="{% url 'attendance_list' %}" class="nav-link"><i class="fas fa-calendar-check"></i> Attendance</a>
+          <a href="{% url 'result_list' %}" class="nav-link"><i class="fas fa-file-alt"></i> Results</a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-label">Account</div>
+          <a href="{% url 'logout' %}" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="main">
+
+      <div class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <h1>Course Details</h1>
+
+        <div class="profile-wrapper">
+          <button class="profile-button" tabindex="0">
+            <div class="profile-avatar"><i class="fas fa-user-graduate"></i></div>
+            <div class="profile-text">
+              <span><i class="fas fa-circle"></i> Student</span>
+            </div>
+            <i class="fas fa-chevron-down profile-arrow"></i>
+          </button>
+
+          <div class="profile-dropdown">
+            <div class="dropdown-user">
+              <div class="dropdown-avatar"><i class="fas fa-user-graduate"></i></div>
+            </div>
+            <a href="{% url 'profile' %}" class="dropdown-item">
+              <div class="dropdown-icon"><i class="fas fa-user"></i></div>
+              <div class="dropdown-content">
+                <strong>My Profile</strong><span>View your profile</span>
+              </div>
+              <i class="fas fa-chevron-right dropdown-arrow"></i>
+            </a>
+            <a href="{% url 'register' %}" class="dropdown-item">
+              <div class="dropdown-icon"><i class="fas fa-user-plus"></i></div>
+              <div class="dropdown-content">
+                <strong>Registration</strong><span>Create new account</span>
+              </div>
+              <i class="fas fa-chevron-right dropdown-arrow"></i>
+            </a>
+            <a href="{% url 'login' %}" class="dropdown-item">
+              <div class="dropdown-icon"><i class="fas fa-right-to-bracket"></i></div>
+              <div class="dropdown-content">
+                <strong>Login</strong><span>Sign in to account</span>
+              </div>
+              <i class="fas fa-chevron-right dropdown-arrow"></i>
+            </a>
+            <div class="dropdown-line"></div>
+            <a href="{% url 'logout' %}" class="dropdown-item logout-item">
+              <div class="dropdown-icon"><i class="fas fa-power-off"></i></div>
+              <div class="dropdown-content">
+                <strong>Logout</strong><span>Sign out safely</span>
+              </div>
+              <i class="fas fa-chevron-right dropdown-arrow"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a href="{% url 'course_list' %}" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Courses
+      </a>
+
+      <div class="detail-card">
+        <div class="detail-header">
+          <div class="detail-avatar"><i class="fas fa-book"></i></div>
+          <div class="detail-title">
+            <h2>{{ course.courses_name }}</h2>
+            <p><i class="fas fa-code"></i> Course Code: {{ course.courses_code }}</p>
+            <span class="badge badge-info">{{ course.duration }}</span>
+          </div>
+        </div>
+
+        <div class="detail-body">
+          <div class="info-grid">
+            <div class="info-item">
+              <label><i class="fas fa-clock"></i> Duration</label>
+              <div class="value">{{ course.during }}</div>
+            </div>
+            <div class="info-item">
+              <label><i class="fas fa-star"></i> Total Credits</label>
+              <div class="value">{{ course.total_credits|default:"—" }} Credits</div>
+            </div>
+            <div class="info-item">
+              <label><i class="fas fa-rupee-sign"></i> Fee Par Year</label>
+              <div class="value">{{ course.fee_par_year|default:"—" }}  Year</div>
+            </div>
+            <div class="info-item">
+              <label><i class="fas fa-toggle-on"></i> Status</label>
+              <div class="value">
+                {% if course.status == "Active" %}
+                  <span class="badge badge-active">Active</span>
+                {% elif course.status == "Pending" %}
+                  <span class="badge badge-pending">Pending</span>
+                {% else %}
+                  <span class="badge badge-inactive">Inactive</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:1.5rem;">
+            <label><i class="fas fa-info-circle"></i> Course Description</label>
+            <div class="description-box">
+              {{ course.description|default:"No description available." }}
+            </div>
+          </div>
+
+          <div class="actions">
+            <a href="{% url 'course_edit' course.id %}" class="btn btn-primary">
+              <i class="fas fa-edit"></i> Edit
+            </a>
+            <a href="{% url 'course_delete' course.id %}" class="btn btn-danger"
+               onclick="return confirm('Delete this course?')">
+              <i class="fas fa-trash"></i> Delete
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="{% static 'js/sidebar.js' %}"></script>
+</body>
+</html>

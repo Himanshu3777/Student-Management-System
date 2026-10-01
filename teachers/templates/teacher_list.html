@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teachers | SMS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'CSS/teachers.css' %}">
+</head>
+<body>
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <i class="fas fa-graduation-cap"></i>
+        <h2>SMS Portal</h2>
+      </div>
+      <nav>
+        <div class="nav-section">
+          <div class="nav-label">Main</div>
+          <a href="{% url 'home' %}" class="nav-link"><i class="fas fa-home"></i> Dashboard</a>
+          <a href="{% url 'profile' %}" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-label">Management</div>
+          <a href="{% url 'student_list' %}" class="nav-link"><i class="fas fa-user-graduate"></i> Students</a>
+          <a href="{% url 'teacher_list' %}" class="nav-link active"><i class="fas fa-chalkboard-teacher"></i> Teachers</a>
+          <a href="{% url 'course_list' %}" class="nav-link"><i class="fas fa-book"></i> Courses</a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-label">Records</div>
+          <a href="{% url 'attendance_list' %}" class="nav-link"><i class="fas fa-calendar-check"></i> Attendance</a>
+          <a href="{% url 'result_list' %}" class="nav-link"><i class="fas fa-file-alt"></i> Results</a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-label">Account</div>
+          <a href="{% url 'logout' %}" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <div class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <h1>Teachers Management</h1>
+
+        <div class="profile-wrapper">
+          <button class="profile-button" tabindex="0">
+            <div class="profile-avatar"><i class="fas fa-user-graduate"></i></div>
+            <div class="profile-text">
+              <span><i class="fas fa-circle"></i> Student</span>
+            </div>
+            <i class="fas fa-chevron-down profile-arrow"></i>
+          </button>
+
+          <div class="profile-dropdown">
+            <div class="dropdown-user">
+              <div class="dropdown-avatar"><i class="fas fa-user-graduate"></i></div>
+            </div>
+            <a href="{% url 'profile' %}" class="dropdown-item">
+              <div class="dropdown-icon"><i class="fas fa-user"></i></div>
+              <div class="dropdown-content">
+                <strong>My Profile</strong><span>View your profile</span>
+              </div>
+              <i class="fas fa-chevron-right dropdown-arrow"></i>
+            </a>
+            <a href="{% url 'register' %}" class="dropdown-item">
+              <div class="dropdown-icon"><i class="fas fa-user-plus"></i></div>
+              <div class="dropdown-content">
+                <strong>Registration</strong><span>Create new account</span>
+              </div>
+              <i class="fas fa-chevron-right dropdown-arrow"></i>
+            </a>
+            <a href="{% url 'login' %}" class="dropdown-item">
+              <div class="dropdown-icon"><i class="fas fa-right-to-bracket"></i></div>
+              <div class="dropdown-content">
+                <strong>Login</strong><span>Sign in to account</span>
+              </div>
+              <i class="fas fa-chevron-right dropdown-arrow"></i>
+            </a>
+            <div class="dropdown-line"></div>
+            <a href="{% url 'logout' %}" class="dropdown-item logout-item">
+              <div class="dropdown-icon"><i class="fas fa-power-off"></i></div>
+              <div class="dropdown-content">
+                <strong>Logout</strong><span>Sign out safely</span>
+              </div>
+              <i class="fas fa-chevron-right dropdown-arrow"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-header">
+        <h2><i class="fas fa-chalkboard-teacher"></i> All Teachers</h2>
+        <div class="page-header-actions">
+
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="teacherSearch" placeholder="Search teachers..."
+                   onkeyup="filterTable('teacherSearch','teacherTable')">
+          </div>
+
+          <a href="{% url 'teacher_add' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Add Teacher
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrapper">
+          <table id="teacherTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Employee ID</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Phone</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="teacherTableBody">
+              <tr>
+                <td colspan="7" style="text-align:center; padding:1.5rem; color:#718096;">
+                  <i class="fas fa-spinner fa-spin"></i> Loading...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="{% static 'JS/sidebar.js' %}"></script>
+  <script src="{% static 'JS/teachers.js' %}"></script>
+</body>
+</html>
