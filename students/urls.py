@@ -5,6 +5,9 @@ urlpatterns = [
     # List
     path('', views.student_list, name='student_list'),
 
+    # Add Student
+    path('add/', views.student_add, name='student_add'),
+
     # List Data (AJAX)
     path('data/', views.student_list_data, name='student_list_data'),
 
