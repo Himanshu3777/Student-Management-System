@@ -34,6 +34,12 @@ ALLOWED_HOSTS = os.environ.get(
     "localhost,127.0.0.1"
 ).split(",")
 
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",")
+    if origin.strip()
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -172,3 +178,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # future me => registration email,password reset,account verification -> jaisi functionality banayenge, to email actual mein send nahi hoga. Console backend email ko terminal mein display karega.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+# Production security settings
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
